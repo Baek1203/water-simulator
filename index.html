@@ -1,26 +1,15 @@
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>물 수위 그래프 시뮬레이터</title>
-    <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
-    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
-    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+<!doctype html>
+<html lang="en">
+  <head>
     <script src="https://cdn.tailwindcss.com"></script>
-</head>
-<body class="bg-slate-50">
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/water-simulator/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>water-graph</title>
+    <script type="module" crossorigin src="/water-simulator/assets/index-CMEFGmJ3.js"></script>
+    <link rel="stylesheet" crossorigin href="/water-simulator/assets/index-nqMpL4T3.css">
+  </head>
+  <body>
     <div id="root"></div>
-
-    <script type="text/babel" src="./src/WaterGraphSimulator.jsx"></script>
-    
-    <script type="text/babel">
-        // index.html이 실행될 때 WaterGraphSimulator를 화면(root)에 띄우는 코드입니다.
-        const RootComponent = () => {
-            return <WaterGraphSimulator />;
-        };
-        const root = ReactDOM.createRoot(document.getElementById('root'));
-        root.render(<RootComponent />);
-    </script>
-</body>
+  </body>
 </html>
