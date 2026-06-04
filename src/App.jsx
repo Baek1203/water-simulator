@@ -496,7 +496,7 @@ window.App = function App() {
         {/* 왼쪽: 물병 선택 및 시뮬레이터 (높이 동기화 및 꽉 차는 레이아웃) */}
         <div className="lg:col-span-5 flex flex-col gap-5 h-full">
           
-          {/* 시뮬레이터 영역 (위로 이동) */}
+          {/* 1. 시뮬레이터 영역 (위로 이동됨) */}
           <div className="bg-white p-6 sm:p-7 rounded-2xl shadow-sm border border-slate-200 flex flex-col items-center flex-1 justify-center min-h-[500px]">
             <div className="flex-1 w-full flex items-center justify-center">
                 <canvas 
@@ -535,7 +535,7 @@ window.App = function App() {
             </div>
           </div>
 
-          {/* 물병 모양 선택 영역 (아래로 이동) */}
+          {/* 2. 물병 모양 선택 영역 (아래로 이동됨) */}
           <div className="bg-white p-5 rounded-2xl shadow-sm border border-slate-200">
             <h2 className="text-sm font-bold text-slate-400 uppercase tracking-wider mb-4">물병 모양 선택</h2>
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
@@ -574,7 +574,7 @@ window.App = function App() {
                 />
             </div>
             
-            {/* 선생님의 팁 영역 (하단 비교 안내 문구 완전 삭제, 한 줄 고정 완벽 구현) */}
+            {/* 선생님의 팁 영역 (한 줄 고정 완벽 구현) */}
             <div className="mt-5 bg-[#f4f8ff] border border-blue-100 rounded-2xl p-6 sm:p-7 flex flex-col items-center shadow-sm w-full max-w-[640px]">
                 <div className="flex items-center justify-center gap-2.5 mb-5 w-full">
                     <div className="bg-blue-100 text-blue-600 p-1.5 rounded-full shrink-0">
