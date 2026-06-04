@@ -491,41 +491,43 @@ window.App = function App() {
         <p className="text-slate-500 font-medium text-center">일정한 속도로 물을 채울 때, 물병의 폭에 따라 물의 높이가 어떻게 변하는지 관찰해 보세요.</p>
       </div>
 
-      <div className="max-w-6xl w-full grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-stretch">
+      <div className="max-w-6xl w-full grid grid-cols-1 lg:grid-cols-12 gap-5 lg:gap-7 items-stretch">
         
-        {/* 왼쪽: 물병 선택 및 시뮬레이터 (전체 영역 높이 채우기 h-full 적용) */}
-        <div className="lg:col-span-5 flex flex-col gap-6 h-full">
-          <div className="bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
+        {/* 왼쪽: 물병 선택 및 시뮬레이터 (높이 동기화 및 꽉 차는 레이아웃) */}
+        <div className="lg:col-span-5 flex flex-col gap-5 h-full">
+          <div className="bg-white p-5 rounded-2xl shadow-sm border border-slate-200">
             <h2 className="text-sm font-bold text-slate-400 uppercase tracking-wider mb-4">물병 모양 선택</h2>
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
               {Object.values(SHAPES).map((shape) => (
                 <button
                   key={shape.id}
                   onClick={() => setSelectedShape(shape.id)}
-                  className={`flex flex-col items-center justify-center p-4 rounded-xl border-2 transition-all duration-200 ${
+                  className={`flex flex-col items-center justify-center p-3 sm:p-4 rounded-xl border-2 transition-all duration-200 ${
                     selectedShape === shape.id 
                       ? 'border-blue-500 bg-blue-50 text-blue-700 shadow-sm' 
                       : 'border-slate-100 bg-white text-slate-500 hover:border-blue-200 hover:bg-slate-50'
                   }`}
                 >
-                  <svg width="28" height="28" viewBox="0 0 24 24" className="mb-2">
+                  <svg width="26" height="26" viewBox="0 0 24 24" className="mb-1.5">
                     <shape.Icon />
                   </svg>
-                  <span className="text-[13px] font-bold text-center leading-tight">{shape.name}</span>
+                  <span className="text-[12px] sm:text-[13px] font-bold text-center leading-tight">{shape.name}</span>
                 </button>
               ))}
             </div>
           </div>
 
-          <div className="bg-white p-6 sm:p-8 rounded-2xl shadow-sm border border-slate-200 flex flex-col items-center flex-1 justify-center">
-            <canvas 
-              ref={bottleCanvasRef} 
-              width={350} 
-              height={400} 
-              className="w-full max-w-[340px] h-auto mb-8 mt-auto"
-            />
+          <div className="bg-white p-6 sm:p-7 rounded-2xl shadow-sm border border-slate-200 flex flex-col items-center flex-1">
+            <div className="flex-1 w-full flex items-center justify-center">
+                <canvas 
+                ref={bottleCanvasRef} 
+                width={350} 
+                height={400} 
+                className="w-full max-w-[320px] h-auto"
+                />
+            </div>
             
-            <div className="flex gap-4 w-full justify-center mt-auto">
+            <div className="flex gap-4 w-full justify-center mt-6">
               <button
                 onClick={() => setIsPlaying(!isPlaying)}
                 className={`flex-1 flex items-center justify-center gap-2 py-4 px-6 rounded-xl text-lg font-bold text-white transition-all ${
@@ -554,37 +556,38 @@ window.App = function App() {
           </div>
         </div>
 
-        {/* 오른쪽: 그래프 결과 및 팁 (h-full 적용) */}
-        <div className="lg:col-span-7 bg-white p-6 sm:p-8 rounded-2xl shadow-sm border border-slate-200 flex flex-col h-full">
+        {/* 오른쪽: 그래프 결과 및 팁 (빈 공간 축소, 글자 잘림 방지, 꽉 차는 레이아웃) */}
+        <div className="lg:col-span-7 bg-white p-5 sm:p-6 rounded-2xl shadow-sm border border-slate-200 flex flex-col h-full">
           <h2 className="text-sm font-bold text-slate-400 uppercase tracking-wider mb-4">그래프 결과</h2>
-          <div className="flex-1 flex flex-col items-center justify-center bg-slate-50 rounded-xl border border-slate-100 p-4 sm:p-6">
-            <canvas 
-              ref={graphCanvasRef} 
-              width={600} 
-              height={500} 
-              className="w-full h-auto max-w-full rounded-lg bg-white shadow-sm"
-            />
+          <div className="flex-1 flex flex-col items-center justify-between bg-slate-50 rounded-xl border border-slate-100 p-4 sm:p-5">
             
-            {/* 선생님의 팁 영역 (하단 메시지 제거) */}
-            <div className="mt-6 w-full bg-[#f4f8ff] border border-blue-100 rounded-2xl p-6 sm:p-8 flex flex-col items-center shadow-sm">
-                <div className="flex items-center justify-center gap-2 mb-5 w-full">
-                    <div className="bg-blue-100 text-blue-600 p-1 rounded-full shrink-0">
-                        <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+            <div className="flex-1 w-full flex items-center justify-center min-h-[300px]">
+                <canvas 
+                ref={graphCanvasRef} 
+                width={600} 
+                height={500} 
+                className="w-full h-auto max-w-full rounded-lg bg-white shadow-sm"
+                />
+            </div>
+            
+            {/* 선생님의 팁 영역 (모양 비교 문구 삭제됨) */}
+            <div className="mt-5 w-full bg-[#f4f8ff] border border-blue-100 rounded-2xl p-5 flex flex-col items-center shadow-sm">
+                <div className="flex items-center justify-center gap-2 mb-4 w-full">
+                    <div className="bg-blue-100 text-blue-600 p-1.5 rounded-full shrink-0">
+                        <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
                             <path strokeLinecap="round" strokeLinejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                         </svg>
                     </div>
-                    <h3 className="font-extrabold text-blue-900 text-[19px] tracking-tight">선생님의 팁</h3>
+                    <h3 className="font-extrabold text-blue-900 text-[18px] tracking-tight">선생님의 팁</h3>
                 </div>
                 
-                <div 
-                    className="flex flex-col items-center gap-4 w-full whitespace-nowrap overflow-visible"
-                    style={{ letterSpacing: '-0.7px', transform: 'scaleX(0.96)' }}
-                >
-                    <p className="text-[16px] sm:text-[17px] text-blue-900 font-medium m-0">
-                        물병의 폭이 좁은 곳에서는 물의 높이가 <span className="font-bold text-blue-700 bg-blue-100/80 px-2.5 py-0.5 rounded mx-1">빠르게</span> 올라가고 (그래프가 가파름),
+                {/* 설명 텍스트 컨테이너: 영역 밖으로 밀어내는 속성 제거, 단어 단위 줄바꿈 유지 */}
+                <div className="flex flex-col items-start gap-2.5 w-fit max-w-full">
+                    <p className="text-[13.5px] sm:text-[14.5px] lg:text-[15.5px] text-blue-900 font-medium m-0 tracking-tight break-keep">
+                        물병의 폭이 좁은 곳에서는 물의 높이가 <span className="font-bold text-blue-700 bg-blue-100/80 px-2 py-0.5 rounded mx-0.5">빠르게</span> 올라가고 (그래프가 가파름),
                     </p>
-                    <p className="text-[16px] sm:text-[17px] text-blue-900 font-medium m-0">
-                        물병의 폭이 넓은 곳에서는 물의 높이가 <span className="font-bold text-blue-700 bg-blue-100/80 px-2.5 py-0.5 rounded mx-1">천천히</span> 올라갑니다 (그래프가 완만함).
+                    <p className="text-[13.5px] sm:text-[14.5px] lg:text-[15.5px] text-blue-900 font-medium m-0 tracking-tight break-keep">
+                        물병의 폭이 넓은 곳에서는 물의 높이가 <span className="font-bold text-blue-700 bg-blue-100/80 px-2 py-0.5 rounded mx-0.5">천천히</span> 올라갑니다 (그래프가 완만함).
                     </p>
                 </div>
             </div>
