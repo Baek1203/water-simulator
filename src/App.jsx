@@ -477,16 +477,16 @@ export default function App() {
   return (
     <div className="min-h-screen bg-slate-50 flex flex-col items-center py-10 px-4 font-sans text-slate-800">
       
-      <div className="max-w-5xl w-full flex items-center gap-3 mb-8">
-        <div className="p-3 bg-blue-500 rounded-xl shadow-lg shadow-blue-200 text-white">
-          <svg width="28" height="28" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-            <path strokeLinecap="round" strokeLinejoin="round" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zM12 18.75c-3.728 0-6.75-3.022-6.75-6.75s3.022-6.75 6.75-6.75 6.75 3.022 6.75 6.75-3.022 6.75-6.75 6.75z" />
-          </svg>
+      <div className="max-w-5xl w-full flex flex-col items-center justify-center mb-8">
+        <div className="flex items-center justify-center gap-3 mb-2">
+          <div className="p-2 bg-blue-500 rounded-xl shadow-lg shadow-blue-200 text-white">
+            <svg width="28" height="28" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zM12 18.75c-3.728 0-6.75-3.022-6.75-6.75s3.022-6.75 6.75-6.75 6.75 3.022 6.75 6.75-3.022 6.75-6.75 6.75z" />
+            </svg>
+          </div>
+          <h1 className="text-3xl font-extrabold tracking-tight text-slate-900 text-center">물병 모양에 따른 높이-시간 그래프</h1>
         </div>
-        <div>
-          <h1 className="text-3xl font-extrabold tracking-tight text-slate-900">물병 모양에 따른 높이-시간 그래프</h1>
-          <p className="text-slate-500 mt-1 font-medium">일정한 속도로 물을 채울 때, 물병의 폭에 따라 물의 높이가 어떻게 변하는지 관찰해 보세요.</p>
-        </div>
+        <p className="text-slate-500 font-medium text-center">일정한 속도로 물을 채울 때, 물병의 폭에 따라 물의 높이가 어떻게 변하는지 관찰해 보세요.</p>
       </div>
 
       <div className="max-w-5xl w-full grid grid-cols-1 lg:grid-cols-12 gap-6">
@@ -561,20 +561,20 @@ export default function App() {
               className="w-full h-auto max-w-full rounded-lg bg-white shadow-sm"
             />
             
-            <div className="mt-6 w-full bg-blue-50 border border-blue-100 rounded-lg p-4 flex gap-4 items-start">
-              <div className="bg-blue-100 text-blue-600 p-1.5 rounded-full shrink-0 mt-0.5">
-                <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
+            <div className="mt-6 w-full bg-blue-50 border border-blue-100 rounded-lg p-5 flex flex-col">
+              <div className="flex items-center justify-center gap-2 mb-3 w-full">
+                <div className="bg-blue-100 text-blue-600 p-1 rounded-full shrink-0">
+                  <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                </div>
+                <h3 className="font-bold text-blue-900 text-lg">선생님의 팁</h3>
               </div>
-              <div>
-                <h3 className="font-bold text-blue-900 mb-1">선생님의 팁</h3>
-                <p className="text-sm text-blue-800 leading-relaxed">
-                  물병의 폭이 좁은 곳에서는 물의 높이가 <b>빠르게</b> 올라가고(그래프가 가파름), 
-                  물병의 폭이 넓은 곳에서는 물의 높이가 <b>천천히</b> 올라갑니다(그래프가 완만함). 
-                  <br className="hidden sm:block"/>모양을 바꿔가며 그래프가 구부러지는 모습을 비교해 보세요!
-                </p>
-              </div>
+              <p className="text-sm text-blue-800 leading-relaxed text-left w-full">
+                물병의 폭이 좁은 곳에서는 물의 높이가 <b>빠르게</b> 올라가고(그래프가 가파름), 
+                물병의 폭이 넓은 곳에서는 물의 높이가 <b>천천히</b> 올라갑니다(그래프가 완만함). 
+                <br className="hidden sm:block"/>모양을 바꿔가며 그래프가 구부러지는 모습을 비교해 보세요!
+              </p>
             </div>
           </div>
         </div>
