@@ -578,15 +578,15 @@ window.App = function App() {
                             <path strokeLinecap="round" strokeLinejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                         </svg>
                     </div>
-                    <h3 className="font-extrabold text-blue-900 text-[18px] tracking-tight">선생님의 팁</h3>
+                    <h3 className="font-extrabold text-blue-900 text-[18px] tracking-tight m-0">선생님의 팁</h3>
                 </div>
                 
-                {/* 설명 텍스트 컨테이너: 영역 밖으로 밀어내는 속성 제거, 단어 단위 줄바꿈 유지 */}
-                <div className="flex flex-col items-start gap-2.5 w-fit max-w-full">
-                    <p className="text-[13.5px] sm:text-[14.5px] lg:text-[15.5px] text-blue-900 font-medium m-0 tracking-tight break-keep">
+                {/* 설명 텍스트 컨테이너: 강제로 한 줄로 유지(whitespace-nowrap)하면서 자간을 줄여 깔끔하게 배치 */}
+                <div className="flex flex-col items-start gap-3 w-fit" style={{ letterSpacing: '-0.5px' }}>
+                    <p className="text-[13.5px] sm:text-[14.5px] lg:text-[15.5px] text-blue-900 font-medium m-0 whitespace-nowrap tracking-tight">
                         물병의 폭이 좁은 곳에서는 물의 높이가 <span className="font-bold text-blue-700 bg-blue-100/80 px-2 py-0.5 rounded mx-0.5">빠르게</span> 올라가고 (그래프가 가파름),
                     </p>
-                    <p className="text-[13.5px] sm:text-[14.5px] lg:text-[15.5px] text-blue-900 font-medium m-0 tracking-tight break-keep">
+                    <p className="text-[13.5px] sm:text-[14.5px] lg:text-[15.5px] text-blue-900 font-medium m-0 whitespace-nowrap tracking-tight">
                         물병의 폭이 넓은 곳에서는 물의 높이가 <span className="font-bold text-blue-700 bg-blue-100/80 px-2 py-0.5 rounded mx-0.5">천천히</span> 올라갑니다 (그래프가 완만함).
                     </p>
                 </div>
