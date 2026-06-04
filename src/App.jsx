@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+const { useState, useEffect, useRef } = React;
 
 // 물병 모양 정의 (폭 계산 함수)
 const SHAPES = {
@@ -55,7 +55,7 @@ const SHAPES = {
   }
 };
 
-export default function App() {
+window.App = function App() {
   const [selectedShape, setSelectedShape] = useState('wide_cylinder');
   const [isPlaying, setIsPlaying] = useState(false);
   
