@@ -493,7 +493,7 @@ window.App = function App() {
 
       <div className="max-w-6xl w-full grid grid-cols-1 lg:grid-cols-12 gap-5 lg:gap-7 items-stretch">
         
-        {/* 왼쪽: 물병 선택 및 시뮬레이터 (높이 동기화 및 꽉 차는 레이아웃) */}
+        {/* 왼쪽: 물병 선택 및 시뮬레이터 (우측 높이와 1:1 완벽 호환되도록 flex-1 동기화) */}
         <div className="lg:col-span-5 flex flex-col gap-5 h-full">
           <div className="bg-white p-5 rounded-2xl shadow-sm border border-slate-200">
             <h2 className="text-sm font-bold text-slate-400 uppercase tracking-wider mb-4">물병 모양 선택</h2>
@@ -517,7 +517,7 @@ window.App = function App() {
             </div>
           </div>
 
-          <div className="bg-white p-6 sm:p-7 rounded-2xl shadow-sm border border-slate-200 flex flex-col items-center flex-1">
+          <div className="bg-white p-6 sm:p-7 rounded-2xl shadow-sm border border-slate-200 flex flex-col items-center flex-1 justify-center min-h-[500px]">
             <div className="flex-1 w-full flex items-center justify-center">
                 <canvas 
                 ref={bottleCanvasRef} 
@@ -556,7 +556,7 @@ window.App = function App() {
           </div>
         </div>
 
-        {/* 오른쪽: 그래프 결과 및 팁 (빈 공간 축소, 글자 잘림 방지, 꽉 차는 레이아웃) */}
+        {/* 오른쪽: 그래프 결과 및 팁 */}
         <div className="lg:col-span-7 bg-white p-5 sm:p-6 rounded-2xl shadow-sm border border-slate-200 flex flex-col h-full">
           <h2 className="text-sm font-bold text-slate-400 uppercase tracking-wider mb-4">그래프 결과</h2>
           <div className="flex-1 flex flex-col items-center justify-between bg-slate-50 rounded-xl border border-slate-100 p-4 sm:p-5">
@@ -570,24 +570,27 @@ window.App = function App() {
                 />
             </div>
             
-            {/* 선생님의 팁 영역 (모양 비교 문구 삭제됨) */}
-            <div className="mt-5 w-full bg-[#f4f8ff] border border-blue-100 rounded-2xl p-5 flex flex-col items-center shadow-sm">
-                <div className="flex items-center justify-center gap-2 mb-4 w-full">
+            {/* 선생님의 팁 영역 (하단 비교 안내 문구 완전 삭제, 한 줄 고정 완벽 구현) */}
+            <div className="mt-5 bg-[#f4f8ff] border border-blue-100 rounded-2xl p-6 sm:p-7 flex flex-col items-center shadow-sm w-full max-w-[640px]">
+                <div className="flex items-center justify-center gap-2.5 mb-5 w-full">
                     <div className="bg-blue-100 text-blue-600 p-1.5 rounded-full shrink-0">
-                        <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                        <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
                             <path strokeLinecap="round" strokeLinejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                         </svg>
                     </div>
-                    <h3 className="font-extrabold text-blue-900 text-[18px] tracking-tight m-0">선생님의 팁</h3>
+                    <h3 className="font-extrabold text-blue-900 text-lg tracking-tight m-0">선생님의 팁</h3>
                 </div>
                 
-                {/* 설명 텍스트 컨테이너: 강제로 한 줄로 유지(whitespace-nowrap)하면서 자간을 줄여 깔끔하게 배치 */}
-                <div className="flex flex-col items-start gap-3 w-fit" style={{ letterSpacing: '-0.5px' }}>
-                    <p className="text-[13.5px] sm:text-[14.5px] lg:text-[15.5px] text-blue-900 font-medium m-0 whitespace-nowrap tracking-tight">
-                        물병의 폭이 좁은 곳에서는 물의 높이가 <span className="font-bold text-blue-700 bg-blue-100/80 px-2 py-0.5 rounded mx-0.5">빠르게</span> 올라가고 (그래프가 가파름),
+                {/* 자간 및 장평 축소 + 한 줄 줄바꿈 방지 적용 */}
+                <div 
+                    className="flex flex-col items-center gap-4 w-full whitespace-nowrap overflow-visible m-0"
+                    style={{ letterSpacing: '-0.7px', transform: 'scaleX(0.96)' }}
+                >
+                    <p className="text-[15.5px] sm:text-[16.5px] text-blue-900 font-medium m-0 tracking-tight text-center">
+                        물병의 폭이 좁은 곳에서는 물의 높이가 <span className="font-bold text-blue-700 bg-blue-100/80 px-2 py-0.5 rounded mx-1">빠르게</span> 올라가고 (그래프가 가파름),
                     </p>
-                    <p className="text-[13.5px] sm:text-[14.5px] lg:text-[15.5px] text-blue-900 font-medium m-0 whitespace-nowrap tracking-tight">
-                        물병의 폭이 넓은 곳에서는 물의 높이가 <span className="font-bold text-blue-700 bg-blue-100/80 px-2 py-0.5 rounded mx-0.5">천천히</span> 올라갑니다 (그래프가 완만함).
+                    <p className="text-[15.5px] sm:text-[16.5px] text-blue-900 font-medium m-0 tracking-tight text-center">
+                        물병의 폭이 넓은 곳에서는 물의 높이가 <span className="font-bold text-blue-700 bg-blue-100/80 px-2 py-0.5 rounded mx-1">천천히</span> 올라갑니다 (그래프가 완만함).
                     </p>
                 </div>
             </div>
