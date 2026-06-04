@@ -1,3 +1,4 @@
+// 빌드(npm run build) 없이 브라우저에서 바로 실행하기 위해 import 대신 전역 객체를 사용합니다.
 const { useState, useEffect, useRef } = React;
 
 // 물병 모양 정의 (폭 계산 함수)
@@ -55,6 +56,7 @@ const SHAPES = {
   }
 };
 
+// 빌드 없이 외부 html에서 읽을 수 있도록 window.App 에 담아줍니다.
 window.App = function App() {
   const [selectedShape, setSelectedShape] = useState('wide_cylinder');
   const [isPlaying, setIsPlaying] = useState(false);
@@ -477,10 +479,10 @@ window.App = function App() {
   return (
     <div className="min-h-screen bg-slate-50 flex flex-col items-center py-10 px-4 font-sans text-slate-800">
       
-      <div className="max-w-5xl w-full flex flex-col items-center justify-center mb-8">
+      <div className="max-w-6xl w-full flex flex-col items-center justify-center mb-8">
         <div className="flex items-center justify-center gap-3 mb-2">
-          <div className="p-2 bg-blue-500 rounded-xl shadow-lg shadow-blue-200 text-white">
-            <svg width="28" height="28" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+          <div className="p-3 bg-blue-500 rounded-xl shadow-lg shadow-blue-200 text-white">
+            <svg width="28" height="28" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zM12 18.75c-3.728 0-6.75-3.022-6.75-6.75s3.022-6.75 6.75-6.75 6.75 3.022 6.75 6.75-3.022 6.75-6.75 6.75z" />
             </svg>
           </div>
@@ -489,7 +491,7 @@ window.App = function App() {
         <p className="text-slate-500 font-medium text-center">일정한 속도로 물을 채울 때, 물병의 폭에 따라 물의 높이가 어떻게 변하는지 관찰해 보세요.</p>
       </div>
 
-      <div className="max-w-5xl w-full grid grid-cols-1 lg:grid-cols-12 gap-6">
+      <div className="max-w-6xl w-full grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8">
         
         <div className="lg:col-span-5 flex flex-col gap-6">
           <div className="bg-white p-5 rounded-2xl shadow-sm border border-slate-200">
@@ -532,9 +534,9 @@ window.App = function App() {
                 }`}
               >
                 {isPlaying ? (
-                  <><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg> 일시정지</>
+                  <><svg width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg> 일시정지</>
                 ) : (
-                  <><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><polygon points="5 3 19 12 5 21 5 3"/></svg> 물 채우기 시작</>
+                  <><svg width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg> 물 채우기 시작</>
                 )}
               </button>
               
@@ -543,7 +545,7 @@ window.App = function App() {
                 className="flex items-center justify-center p-3 rounded-xl bg-slate-100 text-slate-600 hover:bg-slate-200 transition-colors"
                 title="초기화"
               >
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <svg width="24" height="24" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
                   <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/>
                 </svg>
               </button>
@@ -561,21 +563,41 @@ window.App = function App() {
               className="w-full h-auto max-w-full rounded-lg bg-white shadow-sm"
             />
             
-            <div className="mt-6 w-full bg-blue-50 border border-blue-100 rounded-lg p-5 flex flex-col">
-              <div className="flex items-center justify-center gap-2 mb-3 w-full">
-                <div className="bg-blue-100 text-blue-600 p-1 rounded-full shrink-0">
-                  <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                  </svg>
+            {/* 선생님의 팁 영역: 디자인, 글자 자간 및 장평 압축 */}
+            <div className="mt-6 w-full bg-[#f4f8ff] border border-blue-100 rounded-2xl p-6 flex flex-col items-center shadow-sm">
+                <div className="flex items-center justify-center gap-2 mb-4 w-full">
+                    <div className="bg-blue-100 text-blue-600 p-1 rounded-full shrink-0">
+                        <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                    </div>
+                    <h3 className="font-extrabold text-blue-900 text-lg tracking-tight">선생님의 팁</h3>
                 </div>
-                <h3 className="font-bold text-blue-900 text-lg">선생님의 팁</h3>
-              </div>
-              <p className="text-sm text-blue-800 leading-relaxed text-left w-full">
-                물병의 폭이 좁은 곳에서는 물의 높이가 <b>빠르게</b> 올라가고(그래프가 가파름), 
-                물병의 폭이 넓은 곳에서는 물의 높이가 <b>천천히</b> 올라갑니다(그래프가 완만함). 
-                <br className="hidden sm:block"/>모양을 바꿔가며 그래프가 구부러지는 모습을 비교해 보세요!
-              </p>
+                
+                {/* 설명 영역: 자간(letterSpacing)과 장평(scaleX)을 적용하고 강제로 한 줄로 묶습니다. */}
+                <div 
+                    className="flex flex-col items-center gap-3.5 w-full whitespace-nowrap overflow-visible"
+                    style={{ letterSpacing: '-0.7px', transform: 'scaleX(0.96)' }}
+                >
+                    <p className="text-[15.5px] sm:text-[16.5px] text-blue-900 font-medium m-0">
+                        물병의 폭이 좁은 곳에서는 물의 높이가 <span className="font-bold text-blue-700 bg-blue-100/80 px-2 py-0.5 rounded mx-1">빠르게</span> 올라가고 (그래프가 가파름),
+                    </p>
+                    <p className="text-[15.5px] sm:text-[16.5px] text-blue-900 font-medium m-0">
+                        물병의 폭이 넓은 곳에서는 물의 높이가 <span className="font-bold text-blue-700 bg-blue-100/80 px-2 py-0.5 rounded mx-1">천천히</span> 올라갑니다 (그래프가 완만함).
+                    </p>
+                </div>
+                
+                {/* 하단 추가 메시지 */}
+                <div className="mt-6 bg-white px-5 py-2.5 rounded-full border border-blue-100 shadow-sm flex items-center justify-center">
+                    <p 
+                        className="text-[14px] sm:text-[15px] text-blue-800 font-bold whitespace-nowrap m-0"
+                        style={{ letterSpacing: '-0.5px' }}
+                    >
+                        💡 모양을 바꿔가며 그래프가 구부러지는 모습을 비교해 보세요!
+                    </p>
+                </div>
             </div>
+            
           </div>
         </div>
 
