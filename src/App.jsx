@@ -493,30 +493,10 @@ window.App = function App() {
 
       <div className="max-w-6xl w-full grid grid-cols-1 lg:grid-cols-12 gap-5 lg:gap-7 items-stretch">
         
-        {/* 왼쪽: 물병 선택 및 시뮬레이터 (우측 높이와 1:1 완벽 호환되도록 flex-1 동기화) */}
+        {/* 왼쪽: 물병 선택 및 시뮬레이터 (높이 동기화 및 꽉 차는 레이아웃) */}
         <div className="lg:col-span-5 flex flex-col gap-5 h-full">
-          <div className="bg-white p-5 rounded-2xl shadow-sm border border-slate-200">
-            <h2 className="text-sm font-bold text-slate-400 uppercase tracking-wider mb-4">물병 모양 선택</h2>
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
-              {Object.values(SHAPES).map((shape) => (
-                <button
-                  key={shape.id}
-                  onClick={() => setSelectedShape(shape.id)}
-                  className={`flex flex-col items-center justify-center p-3 sm:p-4 rounded-xl border-2 transition-all duration-200 ${
-                    selectedShape === shape.id 
-                      ? 'border-blue-500 bg-blue-50 text-blue-700 shadow-sm' 
-                      : 'border-slate-100 bg-white text-slate-500 hover:border-blue-200 hover:bg-slate-50'
-                  }`}
-                >
-                  <svg width="26" height="26" viewBox="0 0 24 24" className="mb-1.5">
-                    <shape.Icon />
-                  </svg>
-                  <span className="text-[12px] sm:text-[13px] font-bold text-center leading-tight">{shape.name}</span>
-                </button>
-              ))}
-            </div>
-          </div>
-
+          
+          {/* 시뮬레이터 영역 (위로 이동) */}
           <div className="bg-white p-6 sm:p-7 rounded-2xl shadow-sm border border-slate-200 flex flex-col items-center flex-1 justify-center min-h-[500px]">
             <div className="flex-1 w-full flex items-center justify-center">
                 <canvas 
@@ -554,6 +534,30 @@ window.App = function App() {
               </button>
             </div>
           </div>
+
+          {/* 물병 모양 선택 영역 (아래로 이동) */}
+          <div className="bg-white p-5 rounded-2xl shadow-sm border border-slate-200">
+            <h2 className="text-sm font-bold text-slate-400 uppercase tracking-wider mb-4">물병 모양 선택</h2>
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
+              {Object.values(SHAPES).map((shape) => (
+                <button
+                  key={shape.id}
+                  onClick={() => setSelectedShape(shape.id)}
+                  className={`flex flex-col items-center justify-center p-3 sm:p-4 rounded-xl border-2 transition-all duration-200 ${
+                    selectedShape === shape.id 
+                      ? 'border-blue-500 bg-blue-50 text-blue-700 shadow-sm' 
+                      : 'border-slate-100 bg-white text-slate-500 hover:border-blue-200 hover:bg-slate-50'
+                  }`}
+                >
+                  <svg width="26" height="26" viewBox="0 0 24 24" className="mb-1.5">
+                    <shape.Icon />
+                  </svg>
+                  <span className="text-[12px] sm:text-[13px] font-bold text-center leading-tight">{shape.name}</span>
+                </button>
+              ))}
+            </div>
+          </div>
+
         </div>
 
         {/* 오른쪽: 그래프 결과 및 팁 */}
