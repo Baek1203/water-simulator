@@ -1,58 +1,58 @@
 // 빌드(npm run build) 없이 브라우저에서 바로 실행하기 위해 import 대신 전역 객체를 사용합니다.
 const { useState, useEffect, useRef } = React;
 
-// 물병 모양 정의 (폭 계산 함수)
+// 물병 모양 정의 (폭 계산 함수) - 그래프가 과장되어 보이도록 너비 차이를 극대화
 const SHAPES = {
   narrow_cylinder: { 
     id: 'narrow_cylinder', 
     name: '좁은 원기둥', 
-    getW: () => 0.35,
-    Icon: () => <rect x="9" y="4" width="6" height="16" fill="currentColor"/>
+    getW: () => 0.2,
+    Icon: () => <rect x="10" y="4" width="4" height="16" fill="currentColor"/>
   },
   wide_cylinder: { 
     id: 'wide_cylinder', 
     name: '넓은 원기둥', 
-    getW: () => 0.8,
-    Icon: () => <rect x="4" y="4" width="16" height="16" fill="currentColor"/>
+    getW: () => 0.95,
+    Icon: () => <rect x="2" y="4" width="20" height="16" fill="currentColor"/>
   },
   cone_up: { 
     id: 'cone_up', 
     name: '위로 좁아지는 모양', 
-    getW: (y) => 0.85 - 0.55 * y,
-    Icon: () => <polygon points="9,4 15,4 20,20 4,20" fill="currentColor"/>
+    getW: (y) => 0.95 - 0.75 * y,
+    Icon: () => <polygon points="10,4 14,4 22,20 2,20" fill="currentColor"/>
   },
   cone_down: { 
     id: 'cone_down', 
     name: '위로 넓어지는 모양', 
-    getW: (y) => 0.3 + 0.55 * y,
-    Icon: () => <polygon points="4,4 20,4 15,20 9,20" fill="currentColor"/>
+    getW: (y) => 0.2 + 0.75 * y,
+    Icon: () => <polygon points="2,4 22,4 14,20 10,20" fill="currentColor"/>
   },
   hourglass: { 
     id: 'hourglass', 
     name: '호리병', 
-    getW: (y) => y <= 0.5 ? 0.85 - 1.1 * y : 0.3 + 1.1 * (y - 0.5),
+    getW: (y) => y <= 0.5 ? 0.95 - 1.5 * y : 0.2 + 1.5 * (y - 0.5),
     creaseY: 0.5,
-    Icon: () => <polygon points="4,4 20,4 14,12 20,20 4,20 10,12" fill="currentColor"/>
+    Icon: () => <polygon points="2,4 22,4 14,12 22,20 2,20 10,12" fill="currentColor"/>
   },
   flask: { 
     id: 'flask', 
     name: '삼각 플라스크', 
-    getW: (y) => y > 0.5 ? 0.3 : 0.3 + 0.6 * ((0.5 - y) / 0.5),
-    Icon: () => <polygon points="10,4 14,4 14,12 20,20 4,20 10,12" fill="currentColor"/>
+    getW: (y) => y > 0.5 ? 0.2 : 0.2 + 0.75 * ((0.5 - y) / 0.5),
+    Icon: () => <polygon points="10,4 14,4 14,12 22,20 2,20 10,12" fill="currentColor"/>
   },
   step_up: { 
     id: 'step_up', 
     name: '아래가 넓은 계단형', 
-    getW: (y) => y <= 0.5 ? 0.8 : 0.35,
+    getW: (y) => y <= 0.5 ? 0.95 : 0.2,
     stepY: 0.5,
-    Icon: () => <polygon points="4,20 20,20 20,12 15,12 15,4 9,4 9,12 4,12" fill="currentColor"/>
+    Icon: () => <polygon points="2,20 22,20 22,12 14,12 14,4 10,4 10,12 2,12" fill="currentColor"/>
   },
   step_down: { 
     id: 'step_down', 
     name: '위가 넓은 계단형', 
-    getW: (y) => y <= 0.5 ? 0.35 : 0.8,
+    getW: (y) => y <= 0.5 ? 0.2 : 0.95,
     stepY: 0.5,
-    Icon: () => <polygon points="9,20 15,20 15,12 20,12 20,4 4,4 4,12 9,12" fill="currentColor"/>
+    Icon: () => <polygon points="10,20 14,20 14,12 22,12 22,4 2,4 2,12 10,12" fill="currentColor"/>
   }
 };
 
@@ -493,10 +493,30 @@ window.App = function App() {
 
       <div className="max-w-6xl w-full grid grid-cols-1 lg:grid-cols-12 gap-5 lg:gap-7 items-stretch">
         
-        {/* 왼쪽: 물병 선택 및 시뮬레이터 (높이 동기화 및 꽉 차는 레이아웃) */}
+        {/* 왼쪽: 물병 선택 및 시뮬레이터 (우측 높이와 1:1 완벽 호환되도록 flex-1 동기화) */}
         <div className="lg:col-span-5 flex flex-col gap-5 h-full">
-          
-          {/* 시뮬레이터 영역 (위로 이동) */}
+          <div className="bg-white p-5 rounded-2xl shadow-sm border border-slate-200">
+            <h2 className="text-sm font-bold text-slate-400 uppercase tracking-wider mb-4">물병 모양 선택</h2>
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
+              {Object.values(SHAPES).map((shape) => (
+                <button
+                  key={shape.id}
+                  onClick={() => setSelectedShape(shape.id)}
+                  className={`flex flex-col items-center justify-center p-3 sm:p-4 rounded-xl border-2 transition-all duration-200 ${
+                    selectedShape === shape.id 
+                      ? 'border-blue-500 bg-blue-50 text-blue-700 shadow-sm' 
+                      : 'border-slate-100 bg-white text-slate-500 hover:border-blue-200 hover:bg-slate-50'
+                  }`}
+                >
+                  <svg width="26" height="26" viewBox="0 0 24 24" className="mb-1.5">
+                    <shape.Icon />
+                  </svg>
+                  <span className="text-[12px] sm:text-[13px] font-bold text-center leading-tight">{shape.name}</span>
+                </button>
+              ))}
+            </div>
+          </div>
+
           <div className="bg-white p-6 sm:p-7 rounded-2xl shadow-sm border border-slate-200 flex flex-col items-center flex-1 justify-center min-h-[500px]">
             <div className="flex-1 w-full flex items-center justify-center">
                 <canvas 
@@ -534,30 +554,6 @@ window.App = function App() {
               </button>
             </div>
           </div>
-
-          {/* 물병 모양 선택 영역 (아래로 이동) */}
-          <div className="bg-white p-5 rounded-2xl shadow-sm border border-slate-200">
-            <h2 className="text-sm font-bold text-slate-400 uppercase tracking-wider mb-4">물병 모양 선택</h2>
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
-              {Object.values(SHAPES).map((shape) => (
-                <button
-                  key={shape.id}
-                  onClick={() => setSelectedShape(shape.id)}
-                  className={`flex flex-col items-center justify-center p-3 sm:p-4 rounded-xl border-2 transition-all duration-200 ${
-                    selectedShape === shape.id 
-                      ? 'border-blue-500 bg-blue-50 text-blue-700 shadow-sm' 
-                      : 'border-slate-100 bg-white text-slate-500 hover:border-blue-200 hover:bg-slate-50'
-                  }`}
-                >
-                  <svg width="26" height="26" viewBox="0 0 24 24" className="mb-1.5">
-                    <shape.Icon />
-                  </svg>
-                  <span className="text-[12px] sm:text-[13px] font-bold text-center leading-tight">{shape.name}</span>
-                </button>
-              ))}
-            </div>
-          </div>
-
         </div>
 
         {/* 오른쪽: 그래프 결과 및 팁 */}
