@@ -479,6 +479,7 @@ window.App = function App() {
   return (
     <div className="min-h-screen bg-slate-50 flex flex-col items-center py-10 px-4 font-sans text-slate-800">
       
+      {/* 상단 타이틀 중앙 정렬 및 넓은 컨테이너 적용 */}
       <div className="max-w-6xl w-full flex flex-col items-center justify-center mb-8">
         <div className="flex items-center justify-center gap-3 mb-2">
           <div className="p-3 bg-blue-500 rounded-xl shadow-lg shadow-blue-200 text-white">
@@ -493,30 +494,10 @@ window.App = function App() {
 
       <div className="max-w-6xl w-full grid grid-cols-1 lg:grid-cols-12 gap-5 lg:gap-7 items-stretch">
         
-        {/* 왼쪽: 물병 선택 및 시뮬레이터 (우측 높이와 1:1 완벽 호환되도록 flex-1 동기화) */}
+        {/* 왼쪽: 시뮬레이터(위) 및 물병 선택(아래) */}
         <div className="lg:col-span-5 flex flex-col gap-5 h-full">
-          <div className="bg-white p-5 rounded-2xl shadow-sm border border-slate-200">
-            <h2 className="text-sm font-bold text-slate-400 uppercase tracking-wider mb-4">물병 모양 선택</h2>
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
-              {Object.values(SHAPES).map((shape) => (
-                <button
-                  key={shape.id}
-                  onClick={() => setSelectedShape(shape.id)}
-                  className={`flex flex-col items-center justify-center p-3 sm:p-4 rounded-xl border-2 transition-all duration-200 ${
-                    selectedShape === shape.id 
-                      ? 'border-blue-500 bg-blue-50 text-blue-700 shadow-sm' 
-                      : 'border-slate-100 bg-white text-slate-500 hover:border-blue-200 hover:bg-slate-50'
-                  }`}
-                >
-                  <svg width="26" height="26" viewBox="0 0 24 24" className="mb-1.5">
-                    <shape.Icon />
-                  </svg>
-                  <span className="text-[12px] sm:text-[13px] font-bold text-center leading-tight">{shape.name}</span>
-                </button>
-              ))}
-            </div>
-          </div>
-
+          
+          {/* 1. 시뮬레이터 영역 (위쪽으로 이동됨) */}
           <div className="bg-white p-6 sm:p-7 rounded-2xl shadow-sm border border-slate-200 flex flex-col items-center flex-1 justify-center min-h-[500px]">
             <div className="flex-1 w-full flex items-center justify-center">
                 <canvas 
@@ -554,6 +535,30 @@ window.App = function App() {
               </button>
             </div>
           </div>
+
+          {/* 2. 물병 모양 선택 영역 (아래쪽으로 이동됨) */}
+          <div className="bg-white p-5 rounded-2xl shadow-sm border border-slate-200">
+            <h2 className="text-sm font-bold text-slate-400 uppercase tracking-wider mb-4">물병 모양 선택</h2>
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
+              {Object.values(SHAPES).map((shape) => (
+                <button
+                  key={shape.id}
+                  onClick={() => setSelectedShape(shape.id)}
+                  className={`flex flex-col items-center justify-center p-3 sm:p-4 rounded-xl border-2 transition-all duration-200 ${
+                    selectedShape === shape.id 
+                      ? 'border-blue-500 bg-blue-50 text-blue-700 shadow-sm' 
+                      : 'border-slate-100 bg-white text-slate-500 hover:border-blue-200 hover:bg-slate-50'
+                  }`}
+                >
+                  <svg width="26" height="26" viewBox="0 0 24 24" className="mb-1.5">
+                    <shape.Icon />
+                  </svg>
+                  <span className="text-[12px] sm:text-[13px] font-bold text-center leading-tight">{shape.name}</span>
+                </button>
+              ))}
+            </div>
+          </div>
+
         </div>
 
         {/* 오른쪽: 그래프 결과 및 팁 */}
@@ -570,20 +575,20 @@ window.App = function App() {
                 />
             </div>
             
-            {/* 선생님의 팁 영역 (하단 비교 안내 문구 완전 삭제, 한 줄 고정 완벽 구현) */}
-            <div className="mt-5 bg-[#f4f8ff] border border-blue-100 rounded-2xl p-6 sm:p-7 flex flex-col items-center shadow-sm w-full max-w-[640px]">
+            {/* 선생님의 팁 영역 (한 줄 고정 완벽 구현 및 불필요 문구 제거됨) */}
+            <div className="mt-5 bg-[#f4f8ff] border border-blue-100 rounded-2xl p-6 sm:p-7 flex flex-col items-center shadow-sm w-[640px] max-w-full">
                 <div className="flex items-center justify-center gap-2.5 mb-5 w-full">
                     <div className="bg-blue-100 text-blue-600 p-1.5 rounded-full shrink-0">
                         <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
                             <path strokeLinecap="round" strokeLinejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                         </svg>
                     </div>
-                    <h3 className="font-extrabold text-blue-900 text-lg tracking-tight m-0">선생님의 팁</h3>
+                    <h3 className="font-extrabold text-blue-900 text-[19px] tracking-tight m-0">선생님의 팁</h3>
                 </div>
                 
-                {/* 자간 및 장평 축소 + 한 줄 줄바꿈 방지 적용 */}
+                {/* 600px 고정 박스 안에서 자간 및 장평 축소를 통해 무조건 한 줄에 위치하도록 강제함 */}
                 <div 
-                    className="flex flex-col items-center gap-4 w-full whitespace-nowrap overflow-visible m-0"
+                    className="flex flex-col items-center gap-4 w-[600px] whitespace-nowrap overflow-visible m-0"
                     style={{ letterSpacing: '-0.7px', transform: 'scaleX(0.96)' }}
                 >
                     <p className="text-[15.5px] sm:text-[16.5px] text-blue-900 font-medium m-0 tracking-tight text-center">
