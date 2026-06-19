@@ -1,4 +1,4 @@
-// 빌드(npm run build) 없이 브라우저에서 바로 실행하기 위해 import 대신 전역 객체를 사용합니다.
+// 🛑 주의: 브라우저 직접 실행 방식이므로 절대 맨 위에 import 나 export 단어를 적지 마세요! 🛑
 const { useState, useEffect, useRef } = React;
 
 // 물병 모양 정의 (폭 계산 함수) - 그래프가 과장되어 보이도록 너비 차이를 극대화
@@ -56,7 +56,7 @@ const SHAPES = {
   }
 };
 
-// 빌드 없이 외부 html에서 읽을 수 있도록 window.App 에 담아줍니다.
+// 🛑 외부 html에서 읽을 수 있도록 window.App 에 담아줍니다.
 window.App = function App() {
   const [selectedShape, setSelectedShape] = useState('wide_cylinder');
   const [isPlaying, setIsPlaying] = useState(false);
@@ -479,7 +479,6 @@ window.App = function App() {
   return (
     <div className="min-h-screen bg-slate-50 flex flex-col items-center py-10 px-4 font-sans text-slate-800">
       
-      {/* 상단 타이틀 중앙 정렬 및 넓은 컨테이너 적용 */}
       <div className="max-w-6xl w-full flex flex-col items-center justify-center mb-8">
         <div className="flex items-center justify-center gap-3 mb-2">
           <div className="p-3 bg-blue-500 rounded-xl shadow-lg shadow-blue-200 text-white">
@@ -494,7 +493,7 @@ window.App = function App() {
 
       <div className="max-w-6xl w-full grid grid-cols-1 lg:grid-cols-12 gap-5 lg:gap-7 items-stretch">
         
-        {/* 왼쪽: 시뮬레이터(위) 및 물병 선택(아래) */}
+        {/* 왼쪽: 1. 시뮬레이터 (위), 2. 물병 선택 (아래) */}
         <div className="lg:col-span-5 flex flex-col gap-5 h-full">
           
           {/* 1. 시뮬레이터 영역 (위쪽으로 이동됨) */}
