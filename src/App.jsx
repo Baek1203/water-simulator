@@ -1,3 +1,4 @@
+/** @jsx React.createElement */
 // 🛑 주의: 브라우저 직접 실행 방식이므로 절대 맨 위에 import 나 export 단어를 적지 마세요! 🛑
 const { useState, useEffect, useRef } = React;
 
@@ -496,7 +497,7 @@ window.App = function App() {
         {/* 왼쪽: 1. 시뮬레이터 (위), 2. 물병 선택 (아래) */}
         <div className="lg:col-span-5 flex flex-col gap-5 h-full">
           
-          {/* 1. 시뮬레이터 영역 (위쪽으로 이동됨) */}
+          {/* 1. 시뮬레이터 영역 */}
           <div className="bg-white p-6 sm:p-7 rounded-2xl shadow-sm border border-slate-200 flex flex-col items-center flex-1 justify-center min-h-[500px]">
             <div className="flex-1 w-full flex items-center justify-center">
                 <canvas 
@@ -535,7 +536,7 @@ window.App = function App() {
             </div>
           </div>
 
-          {/* 2. 물병 모양 선택 영역 (아래쪽으로 이동됨) */}
+          {/* 2. 물병 모양 선택 영역 */}
           <div className="bg-white p-5 rounded-2xl shadow-sm border border-slate-200">
             <h2 className="text-sm font-bold text-slate-400 uppercase tracking-wider mb-4">물병 모양 선택</h2>
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
@@ -574,7 +575,7 @@ window.App = function App() {
                 />
             </div>
             
-            {/* 선생님의 팁 영역 (한 줄 고정 완벽 구현 및 불필요 문구 제거됨) */}
+            {/* 선생님의 팁 영역 */}
             <div className="mt-5 bg-[#f4f8ff] border border-blue-100 rounded-2xl p-6 sm:p-7 flex flex-col items-center shadow-sm w-[640px] max-w-full">
                 <div className="flex items-center justify-center gap-2.5 mb-5 w-full">
                     <div className="bg-blue-100 text-blue-600 p-1.5 rounded-full shrink-0">
@@ -585,7 +586,6 @@ window.App = function App() {
                     <h3 className="font-extrabold text-blue-900 text-[19px] tracking-tight m-0">선생님의 팁</h3>
                 </div>
                 
-                {/* 600px 고정 박스 안에서 자간 및 장평 축소를 통해 무조건 한 줄에 위치하도록 강제함 */}
                 <div 
                     className="flex flex-col items-center gap-4 w-[600px] whitespace-nowrap overflow-visible m-0"
                     style={{ letterSpacing: '-0.7px', transform: 'scaleX(0.96)' }}
