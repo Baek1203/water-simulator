@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>물병 모양에 따른 높이-시간 그래프</title>
+    <!-- 인터넷에서 React, Babel, Tailwind를 직접 불러옵니다 -->
     <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
     <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
@@ -12,11 +13,21 @@
 <body class="bg-slate-50">
     <div id="root"></div>
 
-    <script type="text/babel" src="./src/App.jsx"></script>
+    <!-- 1. src 폴더 안의 App.jsx 파일을 Babel을 통해 읽도록 설정합니다 -->
+    <!-- data-type="module" 속성을 추가하여 모듈 관련 오류를 방지합니다. -->
+    <script type="text/babel" data-type="module" src="./src/App.jsx"></script>
 
+    <!-- 2. 불러온 App 컴포넌트를 화면에 실행시킵니다 -->
     <script type="text/babel">
         const RootComponent = () => {
-            return <window.App />;
+            // App.jsx에서 window.App에 담아둔 컴포넌트를 가져옵니다.
+            const AppComponent = window.App; 
+            
+            // 아직 로드되지 않았을 경우를 대비한 안전 장치
+            if (!AppComponent) {
+                return <div>로딩 중...</div>; 
+            }
+            return <AppComponent />;
         };
         const root = ReactDOM.createRoot(document.getElementById('root'));
         root.render(<RootComponent />);
