@@ -1,3 +1,4 @@
+/** @jsxRuntime classic */
 /** @jsx React.createElement */
 // 🛑 주의: 브라우저 직접 실행 방식이므로 절대 맨 위에 import 나 export 단어를 적지 마세요! 🛑
 const { useState, useEffect, useRef } = React;
