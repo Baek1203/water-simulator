@@ -1,6 +1,4 @@
-/** @jsxRuntime classic */
-/** @jsx React.createElement */
-// 🛑 주의: 브라우저 직접 실행 방식이므로 절대 맨 위에 import 나 export 단어를 적지 마세요! 🛑
+// 🛑 Babel과 충돌하던 주석을 모두 지우고 순수하게 냅둡니다. 🛑
 const { useState, useEffect, useRef } = React;
 
 // 물병 모양 정의 (폭 계산 함수) - 그래프가 과장되어 보이도록 너비 차이를 극대화
