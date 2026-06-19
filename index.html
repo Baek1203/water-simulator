@@ -4,18 +4,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>물병 모양에 따른 높이-시간 그래프</title>
+    <!-- 인터넷에서 React와 Tailwind를 바로 불러옵니다 -->
     <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
     <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
-    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <!-- 🛑 해결책: 최신 버전 대신, 예전 방식이 잘 먹히는 안정적인 7.23.0 버전으로 고정했습니다! 🛑 -->
+    <script src="https://unpkg.com/@babel/standalone@7.23.0/babel.min.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-slate-50">
     <div id="root"></div>
-
+    
+    <!-- 1. App.jsx 파일 불러오기 -->
     <script type="text/babel" src="./src/App.jsx"></script>
 
+    <!-- 2. 화면에 시뮬레이터 띄우기 -->
     <script type="text/babel">
         const root = ReactDOM.createRoot(document.getElementById('root'));
+        // App.jsx에서 담아준 컴포넌트 실행
         root.render(<window.App />);
     </script>
 </body>
