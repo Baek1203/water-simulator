@@ -1,4 +1,4 @@
-// 빌드(npm run build) 없이 브라우저에서 바로 실행하기 위해 import 대신 전역 객체를 사용합니다.
+// 🛑 Babel과 충돌하던 주석을 모두 지우고 순수하게 냅둡니다. 🛑
 const { useState, useEffect, useRef } = React;
 
 // 물병 모양 정의 (폭 계산 함수) - 그래프가 과장되어 보이도록 너비 차이를 극대화
@@ -56,7 +56,7 @@ const SHAPES = {
   }
 };
 
-// 빌드 없이 외부 html에서 읽을 수 있도록 window.App 에 담아줍니다.
+// 🛑 외부 html에서 읽을 수 있도록 window.App 에 담아줍니다.
 window.App = function App() {
   const [selectedShape, setSelectedShape] = useState('wide_cylinder');
   const [isPlaying, setIsPlaying] = useState(false);
@@ -479,7 +479,6 @@ window.App = function App() {
   return (
     <div className="min-h-screen bg-slate-50 flex flex-col items-center py-10 px-4 font-sans text-slate-800">
       
-      {/* 상단 타이틀 중앙 정렬 및 넓은 컨테이너 적용 */}
       <div className="max-w-6xl w-full flex flex-col items-center justify-center mb-8">
         <div className="flex items-center justify-center gap-3 mb-2">
           <div className="p-3 bg-blue-500 rounded-xl shadow-lg shadow-blue-200 text-white">
@@ -494,10 +493,10 @@ window.App = function App() {
 
       <div className="max-w-6xl w-full grid grid-cols-1 lg:grid-cols-12 gap-5 lg:gap-7 items-stretch">
         
-        {/* 왼쪽: 시뮬레이터(위) 및 물병 선택(아래) */}
+        {/* 왼쪽: 1. 시뮬레이터 (위), 2. 물병 선택 (아래) */}
         <div className="lg:col-span-5 flex flex-col gap-5 h-full">
           
-          {/* 1. 시뮬레이터 영역 (위쪽으로 이동됨) */}
+          {/* 1. 시뮬레이터 영역 */}
           <div className="bg-white p-6 sm:p-7 rounded-2xl shadow-sm border border-slate-200 flex flex-col items-center flex-1 justify-center min-h-[500px]">
             <div className="flex-1 w-full flex items-center justify-center">
                 <canvas 
@@ -536,7 +535,7 @@ window.App = function App() {
             </div>
           </div>
 
-          {/* 2. 물병 모양 선택 영역 (아래쪽으로 이동됨) */}
+          {/* 2. 물병 모양 선택 영역 */}
           <div className="bg-white p-5 rounded-2xl shadow-sm border border-slate-200">
             <h2 className="text-sm font-bold text-slate-400 uppercase tracking-wider mb-4">물병 모양 선택</h2>
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
@@ -575,7 +574,7 @@ window.App = function App() {
                 />
             </div>
             
-            {/* 선생님의 팁 영역 (한 줄 고정 완벽 구현 및 불필요 문구 제거됨) */}
+            {/* 선생님의 팁 영역 */}
             <div className="mt-5 bg-[#f4f8ff] border border-blue-100 rounded-2xl p-6 sm:p-7 flex flex-col items-center shadow-sm w-[640px] max-w-full">
                 <div className="flex items-center justify-center gap-2.5 mb-5 w-full">
                     <div className="bg-blue-100 text-blue-600 p-1.5 rounded-full shrink-0">
@@ -586,7 +585,6 @@ window.App = function App() {
                     <h3 className="font-extrabold text-blue-900 text-[19px] tracking-tight m-0">선생님의 팁</h3>
                 </div>
                 
-                {/* 600px 고정 박스 안에서 자간 및 장평 축소를 통해 무조건 한 줄에 위치하도록 강제함 */}
                 <div 
                     className="flex flex-col items-center gap-4 w-[600px] whitespace-nowrap overflow-visible m-0"
                     style={{ letterSpacing: '-0.7px', transform: 'scaleX(0.96)' }}
